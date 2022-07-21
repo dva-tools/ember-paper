@@ -9,6 +9,7 @@ const Funnel = require('broccoli-funnel');
 const AngularScssFilter = require('./lib/angular-scss-filter');
 const fastbootTransform = require('fastboot-transform');
 
+
 /**
  * Component dependencies, extracted from ember-bootstrap
  * https://github.com/kaliber5/ember-bootstrap/blob/master/index.js
@@ -407,7 +408,6 @@ module.exports = {
 
     this.emberPaperOptions = Object.assign({}, app.options['ember-paper']);
 
-    app.import('vendor/ember-paper/register-version.js');
     app.import('vendor/hammerjs/hammer.js');
     app.import('vendor/propagating-hammerjs/propagating.js');
   },
@@ -462,11 +462,6 @@ module.exports = {
   treeForVendor(tree) {
     let trees = [];
 
-    let versionTree = writeFile(
-      'ember-paper/register-version.js',
-      `Ember.libraries.register('Ember Paper', '${version}');`
-    );
-
     let hammerJs = fastbootTransform(new Funnel(this.pathBase('hammerjs'), {
       files: ['hammer.js'],
       destDir: 'hammerjs'
@@ -477,7 +472,7 @@ module.exports = {
       destDir: 'propagating-hammerjs'
     }));
 
-    trees = trees.concat([hammerJs, propagatingHammerJs, versionTree]);
+    trees = trees.concat([hammerJs, propagatingHammerJs]);
 
     if (tree) {
       trees.push(tree);

@@ -5,7 +5,7 @@ import { or, bool, filter } from '@ember/object/computed';
 
 import Component from '@ember/component';
 import layout from '../templates/components/paper-item';
-import { ParentMixin } from 'ember-composability-tools';
+import { Node } from 'ember-composability-tools';
 import { invokeAction } from 'ember-paper/utils/invoke-action';
 /**
  * @class PaperItem
@@ -21,7 +21,7 @@ import { invokeAction } from 'ember-paper/utils/invoke-action';
   'hasPrimaryAction:_md-button-wrap'
 )
 @attributeBindings('role', 'tabindex', 'title')
-export default class PaperItem extends Component.extend(ParentMixin) {
+export default class PaperItem extends Component.extend(Node) {
   _mouseEnterHandler = undefined;
   _mouseLeaveHandler = undefined;
 
